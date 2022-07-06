@@ -19,10 +19,10 @@ type Value interface {
 	Len() int
 }
 
-func New(maxBytes int64, nbytes int64, OnEvicted func(key string, value Value)) *Cache {
+func New(maxBytes int64, OnEvicted func(key string, value Value)) *Cache {
 	return &Cache{
 		maxBytes:  maxBytes,
-		nbytes:    nbytes,
+		cache:     make(map[string]*list.Element),
 		listPtr:   list.New(),
 		OnEvicted: OnEvicted,
 	}
